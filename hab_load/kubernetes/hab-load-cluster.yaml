@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hab-load-deployment
+  labels:
+    app: hab-load
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: hab-load
+  template:
+    metadata:
+      labels:
+        app: hab-load
+    spec:
+      containers:
+      - name: hab-load
+        image: irvingpop/hab_bastion:0.1.0-20181110003436
+        args:
+        - --topology
+        - standalone
+        - --peer
+        - hab-bastion-1
+        - --peer
+        - hab-bastion-2
+        - --peer
+        - hab-bastion-3
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "50m" # equivalent to 0.05 of a CPU core
+        # env:
+        # - name: HAB_LOAD
+        #   value: |
+        #     protected-mode = 'no'
+        # ports:
+        # - containerPort: 6379

@@ -2,8 +2,8 @@
 
 exec 2>&1
 
-while true; do 
-  wget -q -O- http://localhost:9631/butterfly
-  netstat -an | grep ESTABLISHED
+while true; do
+  # wget -q -O- http://localhost:9631/butterfly
+  # netstat -an | grep ESTABLISHED
   sleep 60
 done

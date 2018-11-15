@@ -10,11 +10,11 @@ pkg_deps=(core/glibc)
 pkg_build_deps=(core/make core/gcc core/git)
 pkg_lib_dirs=(lib)
 
-# automatically inject LD_PRELOAD, so that all running services will get it
-do_setup_environment() {
-  push_runtime_env LD_PRELOAD "${pkg_prefix}/lib/libleak.so"
-  push_buildtime_env LD_PRELOAD ""
-}
+# # automatically inject LD_PRELOAD, so that all running services will get it
+# do_setup_environment() {
+#   push_runtime_env LD_PRELOAD "${pkg_prefix}/lib/libleak.so"
+#   push_buildtime_env LD_PRELOAD ""
+# }
 
 do_build() {
   workdir="${HAB_CACHE_SRC_PATH}/${pkg_dirname}"

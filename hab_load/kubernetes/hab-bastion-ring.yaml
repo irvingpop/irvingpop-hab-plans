@@ -74,7 +74,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: hab-bastion-1
-        image: irvingpop/hab_load:latest
+        image: irvingpop/hab_load:0.2.1-20181119185646
         args:
         - '--peer'
         - 'hab-bastion-3'
@@ -93,6 +93,8 @@ spec:
         env:
         - name: RUST_BACKTRACE
           value: "1"
+        - name: HAB_SUP_BINARY
+          value: /hab/pkgs/irvingpop/hab-sup/0.69.0-dev/20181119183900/bin/hab-sup
         # readinessProbe:
         #   httpGet:
         #     path: /
@@ -137,7 +139,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: hab-bastion-2
-        image: irvingpop/hab_load:latest
+        image: irvingpop/hab_load:0.2.1-20181119185646
         args:
         - '--peer'
         - 'hab-bastion-1'
@@ -156,6 +158,8 @@ spec:
         env:
         - name: RUST_BACKTRACE
           value: "1"
+        - name: HAB_SUP_BINARY
+          value: /hab/pkgs/irvingpop/hab-sup/0.69.0-dev/20181119183900/bin/hab-sup
         # readinessProbe:
         #   httpGet:
         #     path: /
@@ -200,7 +204,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: hab-bastion-3
-        image: irvingpop/hab_load:latest
+        image: irvingpop/hab_load:0.2.1-20181119185646
         args:
         - '--peer'
         - 'hab-bastion-2'
@@ -219,6 +223,8 @@ spec:
         env:
         - name: RUST_BACKTRACE
           value: "1"
+        - name: HAB_SUP_BINARY
+          value: /hab/pkgs/irvingpop/hab-sup/0.69.0-dev/20181119183900/bin/hab-sup
         # readinessProbe:
         #   httpGet:
         #     path: /

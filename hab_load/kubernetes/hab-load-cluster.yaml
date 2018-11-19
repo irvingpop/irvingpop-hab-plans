@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hab-load
-        image: irvingpop/hab_bastion:0.1.0-20181110003436
+        image: irvingpop/hab_load:latest
         args:
         - --topology
         - standalone
@@ -28,7 +28,7 @@ spec:
         - hab-bastion-3
         resources:
           requests:
-            memory: "50Mi"
+            memory: "300Mi"
             cpu: "50m" # equivalent to 0.05 of a CPU core
         # env:
         # - name: HAB_LOAD

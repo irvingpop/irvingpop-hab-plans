@@ -74,14 +74,14 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: hab-bastion-1
-        image: irvingpop/hab_bastion:0.1.0-20181110003436
+        image: irvingpop/hab_load:latest
         args:
         - '--peer'
         - 'hab-bastion-3'
         - '--permanent-peer'
         resources:
           requests:
-            memory: "100Mi"
+            memory: "300Mi"
             cpu: "100m" # equivalent to 0.1 of a CPU core
         ports:
         - name: gossip-listener
@@ -90,18 +90,33 @@ spec:
         - name: http-gateway
           protocol: TCP
           containerPort: 9631
-        volumeMounts:
-        - name: hab-bastion-1
-          mountPath: /hab/sup
-  volumeClaimTemplates:
-  - metadata:
-      name: hab-bastion-1
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      # storageClassName: "standard"
-      resources:
-        requests:
-          storage: 1Gi
+        env:
+        - name: RUST_BACKTRACE
+          value: "1"
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 9631
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 9631
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 20
+  #       volumeMounts:
+  #       - name: hab-bastion-1
+  #         mountPath: /hab/sup
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: hab-bastion-1
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     # storageClassName: "standard"
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
 
 ---
 apiVersion: apps/v1
@@ -122,14 +137,14 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: hab-bastion-2
-        image: irvingpop/hab_bastion:0.1.0-20181110003436
+        image: irvingpop/hab_load:latest
         args:
         - '--peer'
         - 'hab-bastion-1'
         - '--permanent-peer'
         resources:
           requests:
-            memory: "100Mi"
+            memory: "300Mi"
             cpu: "100m" # equivalent to 0.1 of a CPU core
         ports:
         - name: gossip-listener
@@ -138,18 +153,33 @@ spec:
         - name: http-gateway
           protocol: TCP
           containerPort: 9631
-        volumeMounts:
-        - name: hab-bastion-2
-          mountPath: /hab/sup
-  volumeClaimTemplates:
-  - metadata:
-      name: hab-bastion-2
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      # storageClassName: "standard"
-      resources:
-        requests:
-          storage: 1Gi
+        env:
+        - name: RUST_BACKTRACE
+          value: "1"
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 9631
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 9631
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 20
+  #       volumeMounts:
+  #       - name: hab-bastion-2
+  #         mountPath: /hab/sup
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: hab-bastion-2
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     # storageClassName: "standard"
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
 
 ---
 apiVersion: apps/v1
@@ -170,14 +200,14 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: hab-bastion-3
-        image: irvingpop/hab_bastion:0.1.0-20181110003436
+        image: irvingpop/hab_load:latest
         args:
         - '--peer'
         - 'hab-bastion-2'
         - '--permanent-peer'
         resources:
           requests:
-            memory: "100Mi"
+            memory: "300Mi"
             cpu: "100m" # equivalent to 0.1 of a CPU core
         ports:
         - name: gossip-listener
@@ -186,15 +216,30 @@ spec:
         - name: http-gateway
           protocol: TCP
           containerPort: 9631
-        volumeMounts:
-        - name: hab-bastion-3
-          mountPath: /hab/sup
-  volumeClaimTemplates:
-  - metadata:
-      name: hab-bastion-3
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      # storageClassName: "standard"
-      resources:
-        requests:
-          storage: 1Gi
+        env:
+        - name: RUST_BACKTRACE
+          value: "1"
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 9631
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 10
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 9631
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 20
+  #       volumeMounts:
+  #       - name: hab-bastion-3
+  #         mountPath: /hab/sup
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: hab-bastion-3
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     # storageClassName: "standard"
+  #     resources:
+  #       requests:
+  #         storage: 1Gi

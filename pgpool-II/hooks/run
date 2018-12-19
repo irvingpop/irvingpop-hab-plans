@@ -1,0 +1,3 @@
+#!/bin/bash
+
+hab pkg exec {{pkg.origin}}/{{pkg.name}} pgpool -f {{pkg.svc_config_path}}/pgpool.conf
